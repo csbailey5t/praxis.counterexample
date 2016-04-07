@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Counter test</title>
+    <link rel="stylesheet" href="/node_modules/flipclock/compiled/flipclock.css">
+    <link rel="stylesheet" href="/clockstyle.css">
+  </head>
+  <body>
+    <div class="your-clock">
+
+    </div>
+    <p>
+      Need to make a javascript counter that counts upward in time. On leaving page, save the time to sessionstorage. On new page, check if session storage set. If so, resume counter. Save again when leaving.
+    </p>
+    <p>
+      Need three things:
+      <ul>
+        <li>Counter</li>
+        <li>SessionStorage var</li>
+        <li>Save and retrieve events</li>
+      </ul>
+    </p>
+    <p>
+      <a href="counter2.html">Second counter page</a>
+    </p>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src='node_modules/flipclock/compiled/flipclock.js'></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        var clock = $('.your-clock').FlipClock({
+          "autoStart": false
+        });
+
+        if (sessionStorage.getItem("clockTime")){
+          var savedTime = parseInt(sessionStorage.getItem("clockTime"));
+          clock.setTime(savedTime);
+          clock.start();
+        } else {
+          clock.start();
+        }
+
+        $(window).on('beforeunload', function(){
+          var currentTime = clock.getTime();
+          sessionStorage.setItem("clockTime", currentTime.time);
+        });
+
+      });
+    </script>
+
+  </body>
+</html>
