@@ -7,9 +7,8 @@
     <link rel="stylesheet" href="/clockstyle.css">
   </head>
   <body>
-    <div class="your-clock">
-
-    </div>
+    <div class="your-clock"></div>
+    <div id="cost"></div>
     <p>
       Need to make a javascript counter that counts upward in time. On leaving page, save the time to sessionstorage. On new page, check if session storage set. If so, resume counter. Save again when leaving.
     </p>
@@ -45,6 +44,14 @@
           var currentTime = clock.getTime();
           sessionStorage.setItem("clockTime", currentTime.time);
         });
+
+        setInterval(function() {
+          var currentTime = clock.getTime().time;
+          var minimumWagePerSecond = 0.001986111;
+          var currentCost = parseInt(currentTime) * minimumWagePerSecond;
+          $('#cost').text("The current cost is: " + currentCost);
+          // console.log("seconds: ", currentTime, currentCost);
+        }, 5000);
 
       });
     </script>
